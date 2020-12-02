@@ -27,6 +27,8 @@ jobs:
         run: npm run stylelint
       - name: test
         run: npm run test:ci
+      - name: visual test
+        run: npm run eyes-storybook
       - name: build
         run: npm run build
       - name: install build dependencies
@@ -35,3 +37,6 @@ jobs:
         run: npm run license-check:build
       - name: build:test-app
         run: npm run build:test-app
+        env:
+          BRANCH: ${{ env.GITHUB_HEAD_REF_SLUG }}
+

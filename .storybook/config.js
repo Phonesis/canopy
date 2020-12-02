@@ -20,12 +20,24 @@ cssVars({
 addParameters({ docs: { page: null } });
 addDecorator(withA11y);
 
-//Init Dsm
-initDsm({
-  addDecorator,
-  addParameters,
-  callback: () => {
-    require('!style-loader!css-loader!sass-loader!../projects/canopy/src/styles/styles.scss');
-    configure(require.context('../projects/canopy', true, /\.stories\.ts$/), module);
-  },
-});
+
+// automatically import all files ending in *.stories.ts
+const req = require.context('../projects/canopy', true, /.stories.ts$/);
+function loadStories() {
+  req.keys().forEach(filename => req(filename));
+}
+
+configure(loadStories, module);
+
+// //Init Dsm
+// initDsm({
+//   addDecorator,
+//   addParameters,
+//   callback: () => {
+//     require('!style-loader!css-loader!sass-loader!../projects/canopy/src/styles/styles.scss');
+//     configure(
+//       require.context('../projects/canopy', true, /\.stories\.ts$/),
+//       module
+//     );
+//   }
+// });

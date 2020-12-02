@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { boolean, text, withKnobs, select } from '@storybook/addon-knobs';
-import { moduleMetadata } from '@storybook/angular';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
 
 import { LgButtonModule } from './button.module';
 import { notes } from './button.notes';
@@ -9,6 +9,7 @@ import { iconsArray } from '../icon/icons.stories';
 import { LgIconModule, LgIconRegistry } from '../icon';
 import { ButtonIconPosition } from '.';
 import { ButtonVariant, ButtonSize } from './button.interface';
+import { LgButtonComponent } from './button.component';
 
 const buttonVariants = [
   'add-on',
@@ -118,12 +119,20 @@ const createBtnStory = (config: KnobsConfig) => ({
   },
 });
 
+storiesOf('Button', module).add('Button', () => ({
+  component: LgButtonComponent,
+  props: {},
+}));
+
 export const primaryButton = () =>
   createBtnStory({
     variant: 'solid-primary',
   });
 primaryButton.story = {
   parameters: {
+    eyes: {
+      include: true,
+    },
     'in-dsm': {
       id: '5eb292680f022e10952f6b54',
     },

@@ -30,6 +30,8 @@ jobs:
         run: npm run stylelint
       - name: test
         run: npm run test:ci
+      - name: visual test
+        run: npm run eyes-storybook
 
   release:
     needs: [verify]
@@ -57,3 +59,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ env.GITHUB_HEAD_REF_SLUG }}
+
