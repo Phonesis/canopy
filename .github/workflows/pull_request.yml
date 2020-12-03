@@ -28,7 +28,15 @@ jobs:
       - name: test
         run: npm run test:ci
       - name: visual test
+        with:
+          repository: Legal-General-Group-Digital/rlespinasse-github-slug-action
+          token: ${{ secrets.ACCESS_TOKEN }}
+          ref: e4699e49fcf890a3172a02c56ba78d867dbb9fd5 # tag:3.1.0
+          path: ./github/actions/rlespinasse-github-slug-action
+      - uses: ./github/actions/rlespinasse-github-slug-action
         run: npm run eyes-storybook
+        env:
+          BRANCH: ${{ env.GITHUB_HEAD_REF_SLUG }}
       - name: build
         run: npm run build
       - name: install build dependencies
